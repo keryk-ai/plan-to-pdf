@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FDOT Traffic Control Plan - Page 1</title>
+    <style>
+        @page {
+            size: 17in 11in;
+            margin: 0.25in;
+        }
+
+        body {
+            font-family: "Arial", sans-serif;
+            font-size: 9px;
+            line-height: 1.1;
+            margin: 0;
+            padding: 0;
+            color: black;
+        }
+
+        .page-container {
+            width: 100%;
+            height: 10.5in;
+            display: flex;
+            flex-direction: column;
+            border: 3px solid black;
+            position: relative;
+            background-color: #ffffff;
+        }
+
+        .header {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 2px solid black;
+            background-color: #ffffff;
+        }
+
+        .main-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .project-subtitle {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .project-location {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .content-area {
+            flex: 1;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .map-container {
+            flex: 1;
+            border: 2px solid black;
+            margin-bottom: 10px;
+            position: relative;
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .satellite-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .map-container svg {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+        }
+
+        .map-placeholder {
+            color: #666;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .project-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 10px;
+            font-size: 10px;
+        }
+
+        .info-box {
+            border: 1px solid black;
+            padding: 10px;
+            background-color: #f8f8f8;
+        }
+
+        .info-title {
+            font-weight: bold;
+            text-decoration: underline;
+            margin-bottom: 5px;
+        }
+
+        .footer {
+            border-top: 3px solid black;
+            padding: 8px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+            align-items: center;
+            background-color: #ffffff;
+            font-size: 9px;
+            font-weight: bold;
+        }
+
+        .footer-section {
+            text-align: center;
+            border-right: 1px solid black;
+            padding: 0 10px;
+        }
+
+        .footer-section:last-child {
+            border-right: none;
+        }
+
+        .fdot-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fdot-logo .logo-circle {
+            width: 40px;
+            height: 40px;
+            background-color: #004B87;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: space-around;
+            padding: 5px;
+            background-color: #f0f0f0;
+            border: 1px solid black;
+            font-size: 8px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .legend-symbol {
+            width: 15px;
+            height: 15px;
+            margin-right: 5px;
+            border: 1px solid black;
+        }
+
+        .work-zone-symbol {
+            background-color: #FFA500;
+        }
+
+        .traffic-control-symbol {
+            background-color: #FF0000;
+        }
+
+        .flagger-symbol {
+            background-color: #FFFF00;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="header">
+            <div class="main-title">Traffic Control Plan</div>
+            <div class="project-subtitle">{{projectName}}</div>
+            <div class="project-location">{{siteLocation}}</div>
+        </div>
+
+        <div class="content-area">
+            <div class="map-container">
+                {{#if satelliteImageData}}
+                {{#if satelliteImageSvg}}
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                    {{{satelliteImageSvg}}}
+                </div>
+                {{else}}
+                <img src="{{satelliteImageData}}" alt="Satellite view of work zone" class="satellite-image">
+                {{/if}}
+                {{else}}
+                <div class="map-placeholder">
+                    Satellite Image Placeholder<br>
+                    Work Zone: {{siteLocation}}<br>
+                    Project: {{projectName}}
+                </div>
+                {{/if}}
+            </div>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-symbol work-zone-symbol"></div>
+                    <span>Work Zone Signs</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-symbol traffic-control-symbol"></div>
+                    <span>Traffic Control Devices</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-symbol flagger-symbol"></div>
+                    <span>Flagger Stations</span>
+                </div>
+                <div class="legend-item">
+                    <span><strong>Work Zone Speed Limit: {{speedLimit}} mph</strong></span>
+                </div>
+                <div class="legend-item">
+                    <span><strong>Work Zone Length: {{workZoneLength}} ft</strong></span>
+                </div>
+            </div>
+
+            <div class="project-info">
+                <div class="info-box">
+                    <div class="info-title">Project Information</div>
+                    <div>Project: {{projectName}}</div>
+                    <div>Location: {{siteLocation}}</div>
+                    {{#if contractNumber}}
+                    <div>Contract: {{contractNumber}}</div>
+                    {{/if}}
+                    {{#if contractor}}
+                    <div>Contractor: {{contractor}}</div>
+                    {{/if}}
+                </div>
+                
+                <div class="info-box">
+                    <div class="info-title">Work Zone Details</div>
+                    <div>Speed Limit: {{speedLimit}} mph</div>
+                    <div>Work Zone Length: {{workZoneLength}} ft</div>
+                    {{#if laneClosureType}}
+                    <div>Lane Closure: {{laneClosureType}}</div>
+                    {{/if}}
+                    {{#if workDescription}}
+                    <div>Work Type: {{workDescription}}</div>
+                    {{/if}}
+                </div>
+                
+                <div class="info-box">
+                    <div class="info-title">Schedule & Duration</div>
+                    {{#if estimatedDuration}}
+                    <div>Duration: {{estimatedDuration}}</div>
+                    {{/if}}
+                    {{#if workHours}}
+                    <div>Work Hours: {{workHours}}</div>
+                    {{/if}}
+                    {{#if weekendWork}}
+                    <div>Weekend Work: {{#if weekendWork}}Yes{{else}}No{{/if}}</div>
+                    {{/if}}
+                    <div>Last Revision: {{lastRevision}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-section">
+                <div>LAST REVISION</div>
+                <div>{{lastRevision}}</div>
+            </div>
+            <div class="footer-section">
+                <div>DESCRIPTION:</div>
+            </div>
+            <div class="footer-section fdot-logo">
+                <div class="logo-circle">FDOT</div>
+                <div>
+                    <div><strong>FY {{fyYear}}</strong></div>
+                    <div><strong>STANDARD PLANS</strong></div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <div><strong>TRAFFIC CONTROL PLAN</strong></div>
+                <div><strong>{{projectName}}</strong></div>
+            </div>
+            <div class="footer-section">
+                <div>INDEX</div>
+                <div>{{indexNumber}}</div>
+            </div>
+            <div class="footer-section">
+                <div>SHEET</div>
+                <div>{{sheetNumber}}</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

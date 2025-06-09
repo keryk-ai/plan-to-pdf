@@ -1,0 +1,53 @@
+# Google Cloud ignore file
+.gcloudignore
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Development files
+.env
+.env.local
+.env.*.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Output files (these will be generated in the cloud)
+output/*.pdf
+output/*.html
+output/uploads/*
+
+# Test files
+test/
+tests/
+*.test.js
+*.spec.js
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+README.md
+docs/
+*.md
+
+# Development scripts
+fix-setup.js
+src/test.js
+src/integration-example.js
+src/client-example.js

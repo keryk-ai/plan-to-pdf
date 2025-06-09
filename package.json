@@ -1,0 +1,43 @@
+{
+  "name": "fdot-plan-generator",
+  "version": "1.0.0",
+  "description": "Generate FDOT traffic control plan PDF documents",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "node src/test.js",
+    "test:advanced": "node src/test.js --advanced",
+    "test:diagnose": "node src/test.js --diagnose",
+    "server": "node src/api-server.js",
+    "server:dev": "nodemon src/api-server.js",
+    "integration": "node src/integration-example.js",
+    "fix-setup": "node fix-setup.js",
+    "puppeteer:install": "npm install puppeteer --unsafe-perm=true --force",
+    "gcloud:setup": "bash setup-permissions.sh",
+    "gcloud:test-local": "./test-local.sh",
+    "gcloud:deploy-dev": "./deploy.sh dev",
+    "gcloud:deploy-staging": "./deploy.sh staging",
+    "gcloud:deploy-prod": "./deploy.sh prod"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "handlebars": "^4.7.8",
+    "moment": "^2.29.4",
+    "multer": "^1.4.4",
+    "pdf-lib": "^1.17.1",
+    "puppeteer": "^21.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "fdot",
+    "traffic-control",
+    "pdf-generation",
+    "engineering"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

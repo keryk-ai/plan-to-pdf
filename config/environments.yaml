@@ -1,0 +1,66 @@
+# Environment configuration for different deployment stages
+
+# Development Environment
+development:
+  PROJECT_ID: sme-interview-platform
+  SERVICE_NAME: fdot-plan-generator-dev
+  REGION: us-central1
+  MEMORY: 2Gi
+  CPU: 1
+  MAX_INSTANCES: 5
+  MIN_INSTANCES: 0
+  TIMEOUT: 900
+  ENVIRONMENT_VARS:
+    NODE_ENV: development
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
+    PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome-stable
+    LOG_LEVEL: debug
+
+# Staging Environment
+staging:
+  PROJECT_ID: sme-interview-platform
+  SERVICE_NAME: fdot-plan-generator-staging
+  REGION: us-central1
+  MEMORY: 2Gi
+  CPU: 1
+  MAX_INSTANCES: 10
+  MIN_INSTANCES: 0
+  TIMEOUT: 900
+  ENVIRONMENT_VARS:
+    NODE_ENV: staging
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
+    PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome-stable
+    LOG_LEVEL: info
+
+# Production Environment
+production:
+  PROJECT_ID: sme-interview-platform
+  SERVICE_NAME: fdot-plan-generator
+  REGION: us-central1
+  MEMORY: 4Gi
+  CPU: 2
+  MAX_INSTANCES: 20
+  MIN_INSTANCES: 1
+  TIMEOUT: 900
+  ENVIRONMENT_VARS:
+    NODE_ENV: production
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
+    PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome-stable
+    LOG_LEVEL: warn
+
+# Monitoring and Alerting
+monitoring:
+  health_check_path: /health
+  metrics_port: 8080
+  log_retention_days: 30
+  
+# Security
+security:
+  allow_unauthenticated: true  # Set to false for internal use
+  cors_origins: ["*"]  # Restrict in production
+  
+# Storage
+storage:
+  output_cleanup_hours: 24  # Clean up generated files after 24 hours
+  max_file_size: "50MB"
+  allowed_file_types: ["image/*", "application/pdf"]

@@ -1,0 +1,116 @@
+{
+  "planTypes": {
+    "102-600": {
+      "title": "General Information for Traffic Control Through Work Zones",
+      "description": "Standard reference tables and guidelines",
+      "pages": ["general-info"]
+    },
+    "102-603": {
+      "title": "Two-Lane, Two-Way Work Within the Travel Way",
+      "description": "Lane closure and flagger control procedures",
+      "pages": ["general-info", "work-zone"]
+    },
+    "102-605": {
+      "title": "Multi-Lane Highway Lane Closure",
+      "description": "Multi-lane highway traffic control",
+      "pages": ["general-info", "multi-lane-closure"]
+    },
+    "102-610": {
+      "title": "Interstate Highway Lane Closure",
+      "description": "Interstate and limited access highway control",
+      "pages": ["general-info", "interstate-closure"]
+    }
+  },
+  
+  "speedLimits": {
+    "urban": [25, 30, 35, 40, 45],
+    "suburban": [35, 40, 45, 50, 55],
+    "rural": [45, 50, 55, 60, 65, 70],
+    "interstate": [60, 65, 70, 75, 80]
+  },
+  
+  "deviceSpacing": {
+    "25": { "barricades": 50, "cones": 20 },
+    "30": { "barricades": 60, "cones": 30 },
+    "35": { "barricades": 75, "cones": 40 },
+    "40": { "barricades": 100, "cones": 80 },
+    "45": { "barricades": 115, "cones": 100 },
+    "50": { "barricades": 130, "cones": 120 },
+    "55": { "barricades": 150, "cones": 140 },
+    "60": { "barricades": 160, "cones": 160 },
+    "65": { "barricades": 175, "cones": 180 },
+    "70": { "barricades": 200, "cones": 200 }
+  },
+  
+  "taperLengths": {
+    "25": 155,
+    "30": 200,
+    "35": 250,
+    "40": 305,
+    "45": 360,
+    "50": 425,
+    "55": 490,
+    "60": 565,
+    "65": 645,
+    "70": 730
+  },
+  
+  "bufferLengths": {
+    "25": 155,
+    "30": 200,
+    "35": 250,
+    "40": 305,
+    "45": 360,
+    "50": 425,
+    "55": 490,
+    "60": 565,
+    "65": 645,
+    "70": 730
+  },
+  
+  "signSpacing": {
+    "arterial_40": 500,
+    "arterial_45": 500,
+    "limited_access": 1500
+  },
+  
+  "workZoneTypes": {
+    "lane_closure": {
+      "description": "Single lane closure with flagger control",
+      "applicableIndexes": ["102-603", "102-605"],
+      "requiredSigns": ["W20-1F", "W3-5a", "WOT-16-10", "W21-5a", "W20-7A"]
+    },
+    "shoulder_work": {
+      "description": "Work on shoulder area",
+      "applicableIndexes": ["102-620", "102-625"],
+      "requiredSigns": ["W20-1F", "W21-1"]
+    },
+    "moving_operation": {
+      "description": "Mobile work operations",
+      "applicableIndexes": ["102-650", "102-655"],
+      "requiredSigns": ["W20-1F", "W21-8a"]
+    }
+  },
+  
+  "defaultValues": {
+    "fyYear": "2024-25",
+    "certificateNumber": "605769",
+    "instructorName": "Mark Meyers",
+    "issueDate": "02/13/2023",
+    "expirationDate": "02/02/2027",
+    "watermark": "MARK@MOTPLANS.COM",
+    "phone": "407-401-4209",
+    "verificationUrl": "www.myworkzebra.com"
+  },
+  
+  "validation": {
+    "required_fields": [
+      "projectName",
+      "siteLocation", 
+      "speedLimit",
+      "workZoneLength"
+    ],
+    "speed_limit_range": [25, 80],
+    "work_zone_length_range": [100, 50000]
+  }
+}

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FDOT Work Zone Details - Page 3</title>
+    <style>
+        @page {
+            size: 17in 11in;
+            margin: 0.25in;
+        }
+
+        body {
+            font-family: "Arial", sans-serif;
+            font-size: 9px;
+            line-height: 1.1;
+            margin: 0;
+            padding: 0;
+            color: black;
+        }
+
+        .page-container {
+            width: 100%;
+            height: 10.5in;
+            display: flex;
+            flex-direction: column;
+            border: 3px solid black;
+            position: relative;
+            background-color: #ffffff;
+        }
+
+        .content-area {
+            flex: 1;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        .traffic-diagram {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            border: 1px solid black;
+            margin-bottom: 15px;
+            background-color: #ffffff;
+        }
+
+        .road-section {
+            position: absolute;
+            top: 40%;
+            left: 10%;
+            right: 10%;
+            height: 40px;
+            background-color: #f0f0f0;
+            border-top: 2px solid black;
+            border-bottom: 2px solid black;
+        }
+
+        .center-line {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: repeating-linear-gradient(
+                to right,
+                #FFFF00 0px,
+                #FFFF00 10px,
+                transparent 10px,
+                transparent 30px
+            );
+        }
+
+        .work-zone-signs {
+            position: absolute;
+            top: 15%;
+            left: 15%;
+            right: 15%;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .diamond-sign {
+            width: 40px;
+            height: 40px;
+            background-color: #FFA500;
+            border: 2px solid black;
+            transform: rotate(45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .diamond-sign .sign-text {
+            transform: rotate(-45deg);
+            text-align: center;
+            line-height: 1;
+        }
+
+        .distance-markers {
+            position: absolute;
+            bottom: 15%;
+            left: 15%;
+            right: 15%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 8px;
+            font-weight: bold;
+        }
+
+        .notes-section {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .left-notes {
+            width: 65%;
+            padding-right: 20px;
+        }
+
+        .right-notes {
+            width: 35%;
+            padding-left: 20px;
+        }
+
+        .notes-title {
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .notes-list {
+            font-size: 7px;
+            line-height: 1.2;
+        }
+
+        .notes-list ol {
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        .notes-list li {
+            margin-bottom: 5px;
+        }
+
+        .symbols-section {
+            margin-top: 20px;
+            border: 1px solid black;
+            padding: 10px;
+            background-color: #f8f8f8;
+        }
+
+        .symbols-title {
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .symbol-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            font-size: 8px;
+        }
+
+        .symbol-icon {
+            width: 20px;
+            height: 15px;
+            border: 1px solid black;
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+        .work-area-hatch {
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 2px,
+                black 2px,
+                black 2.5px
+            );
+        }
+
+        .channelizing-device {
+            background-color: black;
+            border-radius: 50%;
+            width: 8px;
+            height: 8px;
+        }
+
+        .option-boxes {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .option-box {
+            border: 1px solid black;
+            padding: 10px;
+            width: 45%;
+            text-align: center;
+        }
+
+        .option-title {
+            font-weight: bold;
+            font-size: 9px;
+            margin-bottom: 10px;
+            text-decoration: underline;
+        }
+
+        .rumble-strip-diagram {
+            height: 60px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            position: relative;
+            margin: 10px 0;
+        }
+
+        .rumble-strip {
+            position: absolute;
+            top: 30%;
+            left: 10%;
+            right: 10%;
+            height: 40%;
+            background: repeating-linear-gradient(
+                90deg,
+                black 0px,
+                black 2px,
+                #ccc 2px,
+                #ccc 6px
+            );
+        }
+
+        .footer {
+            border-top: 3px solid black;
+            padding: 8px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+            align-items: center;
+            background-color: #ffffff;
+            font-size: 9px;
+            font-weight: bold;
+        }
+
+        .footer-section {
+            text-align: center;
+            border-right: 1px solid black;
+            padding: 0 10px;
+        }
+
+        .footer-section:last-child {
+            border-right: none;
+        }
+
+        .fdot-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fdot-logo .logo-circle {
+            width: 40px;
+            height: 40px;
+            background-color: #004B87;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+
+        .work-zone-length {
+            position: absolute;
+            bottom: 5%;
+            left: 45%;
+            font-size: 8px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="content-area">
+            <!-- Traffic Control Diagram -->
+            <div class="traffic-diagram">
+                <!-- Work Zone Signs -->
+                <div class="work-zone-signs">
+                    <div class="diamond-sign">
+                        <div class="sign-text">G20-2<br>(See Note 6)<br>END<br>ROAD WORK</div>
+                    </div>
+                    <div class="diamond-sign">
+                        <div class="sign-text">ROAD<br>WORK<br>AHEAD<br>W20-1F</div>
+                    </div>
+                    <div class="diamond-sign">
+                        <div class="sign-text">WOT-13-06<br>(See Note 6)</div>
+                    </div>
+                    <div class="diamond-sign">
+                        <div class="sign-text">WOT-16-10<br>(See Note 4)</div>
+                    </div>
+                    <div class="diamond-sign">
+                        <div class="sign-text">MERGE<br>LEFT<br>W21-5a</div>
+                    </div>
+                    <div class="diamond-sign">
+                        <div class="sign-text">FLAGGER<br>AHEAD<br>W20-7A<br>(See Note 3)</div>
+                    </div>
+                </div>
+
+                <!-- Road Section -->
+                <div class="road-section"></div>
+                <div class="center-line"></div>
+                
+                <!-- Distance Markers -->
+                <div class="distance-markers">
+                    <span>250'</span>
+                    <span>X</span>
+                    <span>X</span>
+                    <span>X</span>
+                    <span>X</span>
+                    <span>B</span>
+                </div>
+
+                <!-- Work Zone Length -->
+                <div class="work-zone-length">{{workZoneLength}} ft</div>
+            </div>
+
+            <!-- Notes and Options Section -->
+            <div class="notes-section">
+                <div class="left-notes">
+                    <div class="notes-title">NOTES:</div>
+                    <div class="notes-list">
+                        <ol>
+                            <li>This index applies to Two-Lane, Two-Way Roadways with work within the traveled way.</li>
+                            <li>L = Taper Length<br>B = Buffer Length<br>X = Work Zone Sign Spacing<br>See Index 102-600 for "L", "B", "X" and channelizing device spacing values.</li>
+                            <li>Optionally, use "Flagger Ahead" sign with symbol (W20-7) instead of "Flagger Ahead" sign with text (W20-7A).</li>
+                            <li>Use temporary raised rumble strips when the existing posted speed is 55 mph or greater and the work duration is greater than 60 minutes. If temporary raised rumble strips are not used, omit "Rumble Strips Ahead" signs (WOT-16-10) and associated work zone sign spacing.</li>
+                            <li>Additional one-way control may be provided by the following means:<br>a. Flag-carrying vehicle<br>b. Official vehicle<br>c. Pilot vehicles<br>d. Traffic signals</li>
+                            <li>The "Speeding Fines Doubled When Workers Present" signs (WOT-13-06) and "End Road Work" signs (G20-2), along with associated work zone sign spacing, may be omitted when the work operation will be in place for 24 hours or less.</li>
+                            <li>Automated Flagger Assistance Devices (AFADs) may be used in accordance with Specification Sections 102, 990 and the APL vendor drawings.</li>
+                            <li>Railroad Crossings<br>a. If an active railroad crossing is located closer to the Work Area than the queue length plus 300 feet, extend the Buffer Space as shown on Sheet 2.<br>b. If the queuing of vehicles across an active railroad crossing is expected, provide a uniformed traffic control officer or flagger at the highway-rail grade crossing to prevent vehicles from stopping within the highway-rail grade crossing, even if automatic train warning devices are in place.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="right-notes">
+                    <!-- Option Boxes -->
+                    <div class="option-boxes">
+                        <div class="option-box">
+                            <div class="option-title">OPTION - 1<br>REMOVABLE STRIPING TYPE</div>
+                            <div class="rumble-strip-diagram">
+                                <div class="rumble-strip"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="option-boxes">
+                        <div class="option-box">
+                            <div class="option-title">OPTION - 2<br>PORTABLE TYPE</div>
+                            <div class="rumble-strip-diagram">
+                                <div class="rumble-strip"></div>
+                            </div>
+                            <div style="font-weight: bold; margin-top: 10px;">RUMBLE STRIP SETS</div>
+                        </div>
+                    </div>
+
+                    <!-- Symbols Section -->
+                    <div class="symbols-section">
+                        <div class="symbols-title">SYMBOLS:</div>
+                        <div class="symbol-item">
+                            <div class="symbol-icon work-area-hatch"></div>
+                            <span>Work Area</span>
+                        </div>
+                        <div class="symbol-item">
+                            <div class="symbol-icon channelizing-device"></div>
+                            <span>Channelizing Device (See Index 102-600)</span>
+                        </div>
+                        <div class="symbol-item">
+                            <div class="symbol-icon" style="background-color: white; border: 2px solid black; display: flex; align-items: center; justify-content: center; font-weight: bold;">D</div>
+                            <span>Work Zone Sign</span>
+                        </div>
+                        <div class="symbol-item">
+                            <div class="symbol-icon" style="display: flex; align-items: center; justify-content: center;">⟲</div>
+                            <span>Flagger</span>
+                        </div>
+                        <div class="symbol-item">
+                            <div class="symbol-icon" style="display: flex; align-items: center; justify-content: center;">→</div>
+                            <span>Lane Identification and Direction of Traffic</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-section">
+                <div>LAST REVISION</div>
+                <div>{{lastRevision}}</div>
+            </div>
+            <div class="footer-section">
+                <div>DESCRIPTION:</div>
+            </div>
+            <div class="footer-section fdot-logo">
+                <div class="logo-circle">FDOT</div>
+                <div>
+                    <div><strong>FY {{fyYear}}</strong></div>
+                    <div><strong>STANDARD PLANS</strong></div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <div><strong>TWO-LANE, TWO-WAY</strong></div>
+                <div><strong>WORK WITHIN THE TRAVEL WAY</strong></div>
+            </div>
+            <div class="footer-section">
+                <div>INDEX</div>
+                <div>{{indexNumber}}</div>
+            </div>
+            <div class="footer-section">
+                <div>SHEET</div>
+                <div>{{sheetNumber}}</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
